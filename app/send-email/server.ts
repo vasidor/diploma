@@ -4,8 +4,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import axios from 'axios';
-import * as nodemailer from nodemailer;
-import smtpTransport from nodemailer-smtp-transport;
+import * as nodemailer from 'nodemailer';
+import smtpTransport from 'nodemailer-smtp-transport';
 
 dotenv.config();
 
