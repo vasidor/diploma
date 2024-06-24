@@ -12,7 +12,7 @@ import { getCategories } from "@/action/get-categories";
 import { link } from "fs";
 
 const CategoryPage = () => {
-    const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     const fetchCategory = async () => {
@@ -34,48 +34,44 @@ const CategoryPage = () => {
       <section className="h-60 w-full relative bg-center bg-[url('/slider3.jpg')]">
         <div className="flex flex-col justify-center items-center h-full bg-black bg-opacity-40 w-full">
           <h1 className="mx-4 font-bold text-4xl text-white ">Наши услуги</h1>
-          <h1 className="mx-4 font-semibold text-xl text-primary-200 text-center">Здесь вы можете выбрать интересную вам продукцию</h1>
+          <h1 className="mx-4 font-semibold text-xl text-primary-200 text-center">
+            Здесь вы можете выбрать интересную вам продукцию
+          </h1>
         </div>
       </section>
+
       <section>
-        
-        <div className="w-full max-w-7xl pt-10 grid place-items-center grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-8 gap-4 w-full max-w-7xl mx-auto">
           {loading &&
-            Array(6)
+            Array(10)
               .fill(0)
               .map((_, index) => (
-                <Card
+                <div
                   key={index}
-                  radius="sm"
-                  shadow="sm"
-                  className="relative flex w-full max-w-xs flex-none bg-default-100 rounded-md shadow-sm"
+                  className="relative flex flex-col w-full bg-default-100 rounded-md shadow-sm overflow-hidden"
                 >
-                  <CardBody className="relative flex flex-col gap-3">
-                    <Skeleton className="w-full h-6 rounded-md"></Skeleton>
-                    <Skeleton className="w-full aspect-square rounded-md"></Skeleton>
-                  </CardBody>
-                </Card>
+                  <div className="flex flex-col gap-3 p-4">
+                    <div className="w-full h-6 bg-gray-300 rounded-md animate-pulse"></div>
+                    <div className="flex-1 bg-gray-300 rounded-md animate-pulse"></div>
+                  </div>
+                </div>
               ))}
           {categories.map((data) => (
             <Link href={`/products/?category=${data.id}`} key={data.id}>
-              <Card
-                radius="sm"
-                shadow="sm"
-                className="relative flex w-full max-w-xs flex-none bg-default-100 rounded-md shadow-sm"
-              >
-                <CardBody className="relative flex flex-col gap-3">
-                  <h3 className="text-center font-medium text-lg text-gray-800">
+              <div className="relative flex flex-col w-full bg-default-100 rounded-md shadow-sm overflow-hidden">
+                <div className="flex flex-col gap-3 p-4">
+                  <h3 className="text-center font-medium text-lg text-gray-800 truncate">
                     {data.name}
                   </h3>
-                  <div className="w-full aspect-square rounded-md">
+                  <div className="flex-1 rounded-md overflow-hidden">
                     <img
                       src={data.imageUrl ?? ""}
                       alt={data.name}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-cover"
                     />
                   </div>
-                </CardBody>
-              </Card>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
@@ -85,4 +81,4 @@ const CategoryPage = () => {
   );
 };
 
-export default CategoryPage
+export default CategoryPage;

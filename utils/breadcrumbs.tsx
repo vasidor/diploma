@@ -33,7 +33,7 @@ const Breadcrumbs: React.FC<{ title?: string }> = ({ title }) => {
           href: "/" + linkPath.slice(0, i + 1).join("/"),
         };
       });
-      setBreadcrumbs([{ breadcrumb: "Главная", href: "/" }, ...pathArray]);
+      setBreadcrumbs([{ breadcrumb: "Категории", href: "/category" }, ...pathArray]);
       setLoading(false);
     }
   }, [router, asPath]);

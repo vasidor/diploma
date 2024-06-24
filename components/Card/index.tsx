@@ -108,7 +108,7 @@ const SliderImagesCard = ({ images }: { images: ImageUrl[] }) => {
         {images && images.length > 0 ? (
           images.map((data, index) => (
             <SwiperSlide key={index}>
-              <div className="relative shadow-black/5 shadow-none rounded-large max-w-xs">
+              <div className="relative shadow-black/5 shadow-none rounded-large max-w-fit">
                 <div className="relative overflow-hidden rounded-inherit rounded-large">
                   <img
                     src={data.url}
