@@ -37,7 +37,8 @@ const ProductsPage = () => {
 
   useEffect(() => {
     if (searchParams) {
-      const category = searchParams.get("category");
+      const categoryId = searchParams.get("category") ? Number(searchParams.get("category")) : 1;
+
       const id = category !== "null" && category !== "0" ? Number(category) : 1;
       setCategoryId(id);
     } else {
