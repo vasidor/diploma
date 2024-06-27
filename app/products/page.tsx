@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { Category } from "@prisma/client";
 import { getCategories } from "@/action/get-categories";
 import { link } from "fs";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/router";
 
 const ProductsPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -36,12 +36,14 @@ const ProductsPage = () => {
   }, []);
 
   useEffect(() => {
-    const categoryId = searchParams?.get("category") ? Number(searchParams.get("category")) : 1;
-
-    // Find the category with the matching ID or default to the first category
-    const foundCategory = categories.find(cat => cat.id === categoryId) || categories[0];
-    setSelectedCategory(foundCategory);
-  }, [searchParams, categories]);
+    if (searchParams) {
+      const categoryId = searchParams.get("category") ? Number(searchParams.get("category")) : 1;
+      
+      // Найти категорию с соответствующим ID или использовать первую категорию по умолчанию
+      const foundCategory = categories.find(cat => cat.id === categoryId) || categories[0];
+      setSelectedCategory(foundCategory);
+    }
+  }, [searchParams, categories]); // Зависимость useEffect: searchParams и categories
 
   if (loading) {
     return <div>Загрузка...</div>;
