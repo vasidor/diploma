@@ -51,7 +51,6 @@ const ProductsPage = () => {
   }
 
 
-
   
   return (
     <main>
