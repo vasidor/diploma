@@ -88,5 +88,6 @@ const ProductsPage = () => {
     </main>
   );
 };
+};
 
 export default ProductsPage;
