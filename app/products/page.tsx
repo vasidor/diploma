@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { Category } from "@prisma/client";
 import { getCategories } from "@/action/get-categories";
 import { link } from "fs";
-import { useSearchParams } from "next/router";
+import { useSearchParams } from "@/action/useSearchParams";
 
 const ProductsPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
