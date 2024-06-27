@@ -14,11 +14,6 @@ import { getCategories } from "@/action/get-categories";
 import { link } from "fs";
 import { useSearchParams } from "@/action/useSearchParams";
 
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/router';
-import { Category } from '@/types'; // Подставьте свой путь к типу Category
-import { getCategories } from '@/api/categories'; // Подставьте свой путь к функции получения категорий
-
 const ProductsPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
