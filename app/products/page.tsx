@@ -47,7 +47,7 @@ const ProductsPage = () => {
     ? categories.find((cat) => cat.id === categoryId) ?? categories[0]
     : categories[0];
   
-  }
+  
   return (
     <main>
       <Header />
@@ -88,6 +88,6 @@ const ProductsPage = () => {
     </main>
   );
 };
-};
+
 
 export default ProductsPage;
