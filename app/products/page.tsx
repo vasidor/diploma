@@ -17,7 +17,7 @@ import { useSearchParams } from "next/navigation";
 const ProductsPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -37,17 +37,25 @@ const ProductsPage = () => {
 
   useEffect(() => {
     if (searchParams) {
-      const categoryId = searchParams.get("category") ? Number(searchParams.get("category")) : 1;
-
-      // Find the category with the matching ID or default to the first category
-      const foundCategory = categories.find(cat => cat.id === categoryId) || categories[0];
-      setSelectedCategory(foundCategory);
+      const category = searchParams.get("category");
+      const id = category !== "null" && category !== "0" ? Number(category) : undefined;
+      setCategoryId(id);
+    } else {
+      // Handle the case when searchParams is null
+      setCategoryId(undefined); // Reset categoryId if searchParams is null
     }
-  }, [searchParams, categories]);
+  }, [searchParams]);
+
+  // Определяем выбранную категорию в зависимости от categoryId
+  const categoryId = searchParams.get("category") ? Number(searchParams.get("category")) : 1;
+
+    ? categories.find((cat) => cat.id === categoryId) ?? categories[0]
+    : categories[0];
 
   if (loading) {
     return <div>Загрузка...</div>;
   }
+
 
   
   return (
