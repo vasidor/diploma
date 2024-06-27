@@ -37,9 +37,8 @@ const ProductsPage = () => {
 
   useEffect(() => {
     if (searchParams) {
-      const categoryId = searchParams.get("category") ? Number(searchParams.get("category")) : 1;
-
-      const categoryId = categoryParam ? Number(categoryParam) : null;
+      const categoryParam = searchParams.get("category");
+      const categoryId = categoryParam ? Number(categoryParam) : 1;
 
       // Find the category with the matching ID or default to the first category
       const foundCategory = categories.find(cat => cat.id === categoryId) || categories[0];
@@ -50,6 +49,7 @@ const ProductsPage = () => {
   if (loading) {
     return <div>Загрузка...</div>;
   }
+
 
 
   
