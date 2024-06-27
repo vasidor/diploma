@@ -17,7 +17,7 @@ import { useSearchParams } from "next/navigation";
 const ProductsPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
-  const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -37,22 +37,18 @@ const ProductsPage = () => {
 
   useEffect(() => {
     if (searchParams) {
-      const category = searchParams.get("category");
-      const id = category !== null && category !== "0" ? Number(category) : 1;
-      setCategoryId(id);
-    } else {
-      // Handle the case when searchParams is null
-      setCategoryId(1); // Default value when searchParams is null
-    }
-  }, [searchParams]);
+      const categoryId = searchParams.get("category") ? Number(searchParams.get("category")) : 1;
 
-  const selectedCategory = categoryId
-    ? categories.find(cat => cat.id === categoryId) ?? categories[0]
-    : categories[0];
+      // Find the category with the matching ID or default to the first category
+      const foundCategory = categories.find(cat => cat.id === categoryId) || categories[0];
+      setSelectedCategory(foundCategory);
+    }
+  }, [searchParams, categories]);
 
   if (loading) {
     return <div>Загрузка...</div>;
   }
+
   
   return (
     <main>
