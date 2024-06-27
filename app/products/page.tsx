@@ -37,19 +37,17 @@ const ProductsPage = () => {
 
   useEffect(() => {
     if (searchParams) {
-      const categoryId = searchParams.get("category") ? Number(searchParams.get("category")) : 1;
-
-      const id = category !== "null" && category !== "0" ? Number(category) : 1;
+      const category = searchParams.get("category");
+      const id = category !== null && category !== "0" ? Number(category) : 1;
       setCategoryId(id);
     } else {
       // Handle the case when searchParams is null
-      setCategoryId(undefined); // Reset categoryId if searchParams is null
+      setCategoryId(1); // Default value when searchParams is null
     }
   }, [searchParams]);
 
-  // Определяем выбранную категорию в зависимости от categoryId
-  const selectedCategory = categoryId !== undefined
-    ? categories.find((cat) => cat.id === categoryId) ?? categories[0]
+  const selectedCategory = categoryId
+    ? categories.find(cat => cat.id === categoryId) ?? categories[0]
     : categories[0];
 
   if (loading) {
