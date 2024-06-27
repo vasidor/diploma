@@ -36,20 +36,16 @@ const ProductsPage = () => {
   }, []);
 
   useEffect(() => {
-    if (searchParams) {
-      const categoryParam = searchParams.get("category"+1);
-      const categoryId = categoryParam ? Number(categoryParam) : 1;
+    const categoryId = searchParams?.get("category") ? Number(searchParams.get("category")) : 1;
 
-      // Find the category with the matching ID or default to the first category
-      const foundCategory = categories.find(cat => cat.id === categoryId) || categories[0];
-      setSelectedCategory(foundCategory);
-    }
+    // Find the category with the matching ID or default to the first category
+    const foundCategory = categories.find(cat => cat.id === categoryId) || categories[0];
+    setSelectedCategory(foundCategory);
   }, [searchParams, categories]);
 
   if (loading) {
     return <div>Загрузка...</div>;
   }
-
 
   
   return (
