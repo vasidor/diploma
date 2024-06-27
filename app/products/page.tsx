@@ -39,7 +39,7 @@ const ProductsPage = () => {
     if (!searchParams) return; // Handle case when searchParams is null or undefined
 
     const category = searchParams.get("category");
-    const id = category ? Number(category) : undefined;
+    const id = category !== null && category !== "0" ? Number(category) : undefined;
     setCategoryId(id);
   }, [searchParams]);
 
@@ -50,8 +50,8 @@ const ProductsPage = () => {
 
   if (loading) {
     return <div>Loading...</div>;
-  
   }
+  
   return (
     <main>
       <Header />
