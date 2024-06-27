@@ -27,7 +27,7 @@ const ProductsPage = () => {
         setCategories(res);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Ошибка при загрузке категорий:", error);
         setLoading(false);
       }
     };
@@ -36,20 +36,23 @@ const ProductsPage = () => {
   }, []);
 
   useEffect(() => {
-    if (!searchParams) return; // Handle case when searchParams is null or undefined
-
-    const category = searchParams.get("category");
-    const id = category !== null && category !== "0" ? Number(category) : undefined;
-    setCategoryId(id);
+    if (searchParams) {
+      const category = searchParams.get("category");
+      const id = category !== "null" && category !== "0" ? Number(category) : undefined;
+      setCategoryId(id);
+    } else {
+      // Handle the case when searchParams is null
+      setCategoryId(undefined); // Reset categoryId if searchParams is null
+    }
   }, [searchParams]);
 
-  // Ensure selectedCategory is properly defined based on categoryId
+  // Определяем выбранную категорию в зависимости от categoryId
   const selectedCategory = categoryId !== undefined
     ? categories.find((cat) => cat.id === categoryId) ?? categories[0]
     : categories[0];
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Загрузка...</div>;
   }
   
   return (
