@@ -1,5 +1,3 @@
-"use client"
-
 import PlaceCardsGrid from "@/components/PlaceCardsGrid";
 import Breadcrumbs from "@/utils/breadcrumbs";
 import Header from "@/components/Header";
@@ -33,9 +31,9 @@ const ProductsPage = () => {
   }, []);
 
   useEffect(() => {
-    if (searchParams) {
+    if (searchParams && categories.length > 0) {
       const categoryId = searchParams.get("category") ? Number(searchParams.get("category")) : 1;
-      const foundCategory = categories.find(cat => cat.id === categoryId) || null;
+      const foundCategory = categories.find(cat => cat.id === categoryId) ?? null;
       setSelectedCategory(foundCategory);
     }
   }, [searchParams, categories]);
@@ -52,7 +50,7 @@ const ProductsPage = () => {
           <section className="h-60 relative bg-center bg-[url('/slider1.jpg')]">
             <div className="flex flex-col justify-center items-center h-full bg-black bg-opacity-40 w-full">
               <h1 className="font-bold text-center text-4xl text-white ">
-                {selectedCategory?.name ?? ""}
+                {selectedCategory ? selectedCategory.name : ""}
               </h1>
               <h1 className="font-semibold text-xl text-primary-200 text-center">
                 Закажите то, что искали!
