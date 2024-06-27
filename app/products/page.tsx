@@ -43,14 +43,14 @@ const ProductsPage = () => {
     setCategoryId(id);
   }, [searchParams]);
 
-  const selectedCategory = categoryId
+  // Ensure selectedCategory is properly defined based on categoryId
+  const selectedCategory = categoryId !== undefined
     ? categories.find((cat) => cat.id === categoryId) ?? categories[0]
     : categories[0];
 
-   if (loading) {
+  if (loading) {
     return <div>Loading...</div>;
   }
-  
   return (
     <main>
       <Header />
