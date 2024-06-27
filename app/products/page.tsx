@@ -14,6 +14,11 @@ import { getCategories } from "@/action/get-categories";
 import { link } from "fs";
 import { useSearchParams } from "@/action/useSearchParams";
 
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/router';
+import { Category } from '@/types'; // Подставьте свой путь к типу Category
+import { getCategories } from '@/api/categories'; // Подставьте свой путь к функции получения категорий
+
 const ProductsPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -38,12 +43,10 @@ const ProductsPage = () => {
   useEffect(() => {
     if (searchParams) {
       const categoryId = searchParams.get("category") ? Number(searchParams.get("category")) : 1;
-      
-      // Найти категорию с соответствующим ID или использовать первую категорию по умолчанию
-      const foundCategory = categories.find(cat => cat.id === categoryId) || categories[0];
+      const foundCategory = categories.find(cat => cat.id === categoryId) || null;
       setSelectedCategory(foundCategory);
     }
-  }, [searchParams, categories]); // Зависимость useEffect: searchParams и categories
+  }, [searchParams, categories]);
 
   if (loading) {
     return <div>Загрузка...</div>;
