@@ -46,11 +46,6 @@ const ProductsPage = () => {
   const selectedCategory = categoryId
     ? categories.find((cat) => cat.id === categoryId) ?? categories[0]
     : categories[0];
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   
   }
   return (
