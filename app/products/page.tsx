@@ -16,19 +16,38 @@ import { useSearchParams } from "next/navigation";
 
 const ProductsPage = () => {
   const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [categoryId, setCategoryId] = useState<number | undefined>(undefined);
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const fetchCategory = async () => {
+    const fetchCategories = async () => {
       try {
         const res = await getCategories();
         setCategories(res);
-      } catch (e) {
-        console.log(e);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        setLoading(false);
       }
     };
-    fetchCategory();
+
+    fetchCategories();
   }, []);
+
+  useEffect(() => {
+    const category = searchParams ? searchParams.get("category") : null;
+    const id = category ? Number(category) : undefined;
+    setCategoryId(id);
+  }, [searchParams]);
+
+  const selectedCategory = categoryId
+    ? categories.find((cat) => cat.id === categoryId) ?? categories[0]
+    : categories[0];
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <main>
       <Header />
