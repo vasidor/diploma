@@ -1,3 +1,5 @@
+"use client"
+
 import PlaceCardsGrid from "@/components/PlaceCardsGrid";
 import Breadcrumbs from "@/utils/breadcrumbs";
 import Header from "@/components/Header";
